@@ -6,9 +6,11 @@ const PIN = require("../models/Pin");
 ROUTER.post('/',  async(req, res)=>{
    const NEWPIN = new PIN(req.body);
    try{
+
       const SAVEPIN = await NEWPIN.save();
       res.status(200).json(SAVEPIN);
    }catch(err){
+      
       res.status(500).json(err)
    };
 });
