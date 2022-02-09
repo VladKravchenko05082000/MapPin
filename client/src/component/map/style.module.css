@@ -7,6 +7,20 @@
   position: relative;
 }
 
+.card input,
+textarea,
+select {
+  border: 1px solid black;
+}
+
+.card input {
+  padding: 5px;
+}
+
+.card textarea {
+  resize: none;
+}
+
 label {
   width: max-content;
   color: tomato;
@@ -43,7 +57,12 @@ label {
   font-size: 12px;
 }
 
-.mapboxgl-popup-close-button {
-  width: 20px;
-  height: 20px;
+.Create__Pin {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  margin-top: 15px;
+  background-color: tomato;
+  cursor: pointer;
 }
