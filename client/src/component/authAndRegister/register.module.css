@@ -1,0 +1,74 @@
+.register__container form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: white;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  padding-right: 35px;
+  font-size: 22px;
+}
+
+.register__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: slateblue;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.register__container form input {
+  padding: 5px;
+  border-bottom: 1px solid black;
+  margin: 15px 0px;
+  background-color: slateblue;
+  color: white;
+}
+
+.register__container form input::placeholder {
+  color: white;
+  font-weight: 300;
+  text-align: center;
+  padding: 0px auto;
+}
+
+.register__container form button {
+  background-color: tomato;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+span {
+  font-size: 12px;
+  text-align: center;
+}
+
+.successfull {
+  color: greenyellow;
+}
+
+.failure {
+  color: rgb(255, 83, 83);
+}

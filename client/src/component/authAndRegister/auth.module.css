@@ -1,0 +1,58 @@
+.auth__container form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: black;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  padding-right: 35px;
+  font-size: 22px;
+}
+
+.auth__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 275px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.auth__container form input {
+  padding: 5px;
+  border-bottom: 1px solid black;
+  margin: 15px 0px;
+  background-color: white; 
+}
+
+.auth__container form input::placeholder {
+  font-weight: 300;
+  text-align: center;
+  padding: 0px auto;
+}
+
+.auth__container form button {
+  background-color: blue;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 16px;
+}

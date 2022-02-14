@@ -66,3 +66,34 @@ label {
   background-color: tomato;
   cursor: pointer;
 }
+
+button {
+  border: none;
+  padding: 5px;
+  color: white;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+.button__container,
+.logout {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.logout {
+  background-color: tomato;
+  margin-left: 10px;
+}
+
+.login {
+  background-color: blueviolet;
+}
+
+.register {
+  background-color: blue;
+  margin-left: 10px;
+}
+
+
