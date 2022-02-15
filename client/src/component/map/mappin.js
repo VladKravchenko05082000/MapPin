@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { webToken } from '../../constant/const';
 
-import { PersonPinCircle, Star } from '@material-ui/icons';
+import { Close, PersonPinCircle, Star } from '@material-ui/icons';
 
 import axios from 'axios';
 import { format } from 'timeago.js';
@@ -16,7 +16,9 @@ import Register from '../authAndRegister/Register';
 import Auth from '../authAndRegister/Auth';
 
 const MapPin = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const storage = window.localStorage;
+
+  const [currentUser, setCurrentUser] = useState(storage.getItem('token'));
   const [pins, setPins] = useState([]);
   const [newPlacePin, setNewPlacePin] = useState(null);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
@@ -25,6 +27,9 @@ const MapPin = () => {
   const [description, setDecription] = useState(null);
   const [type, setType] = useState(1);
   const [rating, setRating] = useState(1);
+
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleMarkerClick = (id) => {
     setCurrentPlaceId(id);
@@ -58,6 +63,11 @@ const MapPin = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleLogout = () => {
+    storage.clear('token');
+    setCurrentUser(null);
   };
 
   useEffect(() => {
@@ -134,6 +144,10 @@ const MapPin = () => {
                     Created by <b>{pin.username}</b>
                   </span>
                   <span className={style.date}>{format(pin.createdAt)}</span>
+                  <Close
+                    className={style.closePopUp}
+                    onClick={() => setCurrentPlaceId(null)}
+                  />
                 </div>
               </Popup>
             )}
@@ -178,21 +192,39 @@ const MapPin = () => {
                 <button className={style.Create__Pin} type="submit">
                   Add Pin
                 </button>
+                <Close
+                  className={style.closePopUp}
+                  onClick={() => setNewPlacePin(null)}
+                />
               </form>
             </div>
           </Popup>
         )}
         {currentUser ? (
-          <button className={style.logout}>Logout</button>
+          <button className={style.logout} onClick={handleLogout}>
+            Logout
+          </button>
         ) : (
           <div className={style.button__container}>
-            <button className={style.login}>Login</button>
-            <button className={style.register}>Register</button>
+            <button className={style.login} onClick={() => setShowLogin(true)}>
+              Login
+            </button>
+            <button
+              className={style.register}
+              onClick={() => setShowRegister(true)}
+            >
+              Register
+            </button>
           </div>
         )}
-        <div className={style.register__form}>
-          <Register />
-        </div>
+        {showRegister && <Register setShowRegister={setShowRegister} />}
+        {showLogin && (
+          <Auth
+            setShowLogin={setShowLogin}
+            storage={storage}
+            setCurrentUser={setCurrentUser}
+          />
+        )}
       </Map>
     </div>
   );

@@ -96,4 +96,10 @@ button {
   margin-left: 10px;
 }
 
-
+.closePopUp {
+  position: absolute;
+  top: -11px;
+  right: -11px;
+  cursor: pointer;
+  z-index: 2;
+}
