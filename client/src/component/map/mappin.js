@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Map, { Marker, Popup } from 'react-map-gl';
+import Select from 'react-select';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -11,12 +12,34 @@ import axios from 'axios';
 import { format } from 'timeago.js';
 
 import style from './style.module.css';
+import 'antd/dist/antd.css';
 
 import Register from '../authAndRegister/Register';
 import Auth from '../authAndRegister/Auth';
 
 const MapPin = () => {
   const storage = window.localStorage;
+
+  const options = [
+    { value: 'Architectural', label: 'Architectural' },
+    { value: 'Culinary', label: 'Culinary' },
+    { value: 'Sports', label: 'Sports' },
+    { value: 'Historical', label: 'Historical' },
+    { value: 'Other', label: 'Other' },
+  ];
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  let [selectType, setSelectType] = useState(1);
+
+  // selectedOption === options[1]
+  //   ? 2
+  //   : selectedOption === options[2]
+  //   ? 3
+  //   : selectedOption === options[3]
+  //   ? 4
+  //   : selectedOption === options[4]
+  //   ? 5
+  //   : 1;
 
   const [currentUser, setCurrentUser] = useState(storage.getItem('token'));
   const [pins, setPins] = useState([]);
@@ -70,6 +93,26 @@ const MapPin = () => {
     setCurrentUser(null);
   };
 
+  console.log(selectedOption);
+
+  const handleChange = (selectedOption) => {
+    setSelectedOption({ selectedOption });
+    selectType =
+      selectedOption === options[0]
+        ? setSelectType(1)
+        : selectedOption === options[1]
+        ? setSelectType(2)
+        : selectedOption === options[2]
+        ? setSelectType(3)
+        : selectedOption === options[3]
+        ? setSelectType(4)
+        : selectedOption === options[4]
+        ? setSelectType(5)
+        : null;
+  };
+
+  console.log(selectType);
+
   useEffect(() => {
     const getPins = async () => {
       try {
@@ -95,18 +138,46 @@ const MapPin = () => {
         mapboxAccessToken={webToken}
         onDblClick={handleAddPopUpClick}
       >
+        <div className={`select-price`} style={{ width: '50%' }}>
+          <Select
+            defaultValue={selectedOption}
+            onChange={handleChange}
+            options={options}
+          />
+        </div>
+
         {pins.map((pin) => (
           <>
-            <Marker longitude={pin.long} latitude={pin.lat} anchor="bottom">
-              <PersonPinCircle
-                style={{
-                  fontSize: '38',
-                  color: pin.username === currentUser ? 'red' : 'blue',
-                  cursor: 'pointer',
-                }}
-                onClick={() => handleMarkerClick(pin._id)}
-              />
-            </Marker>
+            {pin.type === selectType ? (
+              <Marker
+                longitude={pin.long}
+                latitude={pin.lat}
+                key={pin.type}
+                anchor="bottom"
+              >
+                <PersonPinCircle
+                  style={{
+                    fontSize: '38',
+                    color:
+                      pin.rating === 1 && !currentUser
+                        ? '#FF1800'
+                        : pin.rating === 2 && !currentUser
+                        ? '#FF8700'
+                        : pin.rating === 3 && !currentUser
+                        ? '#1DD300'
+                        : pin.rating === 4 && !currentUser
+                        ? '#05819E'
+                        : pin.rating === 5 && !currentUser
+                        ? '#7F07A9'
+                        : pin.username === currentUser
+                        ? 'red'
+                        : 'blue',
+                  }}
+                  onClick={() => handleMarkerClick(pin._id)}
+                />
+              </Marker>
+            ) : null}
+
             {pin._id === currentPlaceId && (
               <Popup
                 key={pin._id}

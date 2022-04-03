@@ -1,6 +1,6 @@
 .card {
   width: 250px;
-  height: 250px;
+  height: 265px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -57,6 +57,8 @@ label {
   font-size: 12px;
 }
 
+
+
 .Create__Pin {
   border: none;
   padding: 10px;
@@ -98,8 +100,12 @@ button {
 
 .closePopUp {
   position: absolute;
-  top: -11px;
-  right: -11px;
+  top: -6px;
+  right: -10px;
   cursor: pointer;
   z-index: 2;
+}
+
+.select__type {
+  width: 30vw;
 }
