@@ -224,7 +224,7 @@ const MapPin = () => {
             )}
           </>
         ))}
-        {newPlacePin && (
+        {newPlacePin && currentUser ? (
           <Popup
             longitude={newPlacePin.lng}
             latitude={newPlacePin.lat}
@@ -270,7 +270,7 @@ const MapPin = () => {
               </form>
             </div>
           </Popup>
-        )}
+        ) : null}
         {currentUser ? (
           <button className={style.logout} onClick={handleLogout}>
             Logout
