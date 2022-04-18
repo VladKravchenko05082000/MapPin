@@ -16,6 +16,7 @@ import 'antd/dist/antd.css';
 
 import Register from '../authAndRegister/Register';
 import Auth from '../authAndRegister/Auth';
+import DeleteBtn from '../deleteBtn/DeleteBtn';
 
 const MapPin = () => {
   const storage = window.localStorage;
@@ -31,16 +32,6 @@ const MapPin = () => {
 
   let [selectType, setSelectType] = useState(1);
 
-  // selectedOption === options[1]
-  //   ? 2
-  //   : selectedOption === options[2]
-  //   ? 3
-  //   : selectedOption === options[3]
-  //   ? 4
-  //   : selectedOption === options[4]
-  //   ? 5
-  //   : 1;
-
   const [currentUser, setCurrentUser] = useState(storage.getItem('token'));
   const [pins, setPins] = useState([]);
   const [newPlacePin, setNewPlacePin] = useState(null);
@@ -53,6 +44,8 @@ const MapPin = () => {
 
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+
+  const [openDeleteModal, setIsOpenDeleteModal] = useState(false);
 
   const handleMarkerClick = (id) => {
     setCurrentPlaceId(id);
@@ -110,8 +103,6 @@ const MapPin = () => {
         ? setSelectType(5)
         : null;
   };
-
-  console.log(selectType);
 
   useEffect(() => {
     const getPins = async () => {
@@ -177,7 +168,6 @@ const MapPin = () => {
                 />
               </Marker>
             ) : null}
-
             {pin._id === currentPlaceId && (
               <Popup
                 key={pin._id}
@@ -215,6 +205,13 @@ const MapPin = () => {
                     Created by <b>{pin.username}</b>
                   </span>
                   <span className={style.date}>{format(pin.createdAt)}</span>
+                  {pin.username === currentUser ? (
+                    <DeleteBtn
+                      openModal={openDeleteModal}
+                      setIsOpen={setIsOpenDeleteModal}
+                      pin={pin._id}
+                    />
+                  ) : null}
                   <Close
                     className={style.closePopUp}
                     onClick={() => setCurrentPlaceId(null)}

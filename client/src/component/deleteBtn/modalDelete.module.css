@@ -1,0 +1,66 @@
+.modalBackground{
+  min-width: 100%;
+  min-height:100%;
+   position: fixed;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 10;
+}
+
+.modalContainer{
+  width: 320px;
+  height: 300px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+}
+
+.modalTitle{
+  display: inline-block;
+  margin-top: 50px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 26px;
+  margin-bottom: 50px;
+}
+
+.modalBody{
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+
+.modalCloseBtn{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.modalCloseBtn button{
+  background-color: transparent;
+  font-size: 22px;
+}
+
+.modalFooter{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modalFooter button{
+  width: 100px;
+  height: 35px;
+  font-size: 16px;
+  background-color: cornflowerblue;
+  color: aliceblue;
+}
+
+.modalFooter button:last-child{
+  background-color: crimson;
+}
